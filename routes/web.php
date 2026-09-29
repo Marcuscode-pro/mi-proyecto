@@ -1,19 +1,26 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PersonaController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\InteresController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\PersonaController;
+use App\Http\Controllers\UsuarioController;
 
-// Ruta pública de bienvenida
+// Redireccionar la página de inicio al Dashboard
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('dashboard');
 });
 
-// Rutas protegidas por autenticación
-Route::middleware(['auth'])->group(function () {
-    Route::resource('personas', PersonaController::class);
-    Route::resource('intereses', InteresController::class);
-    Route::get('/usuarios', [UserController::class, 'index'])
-        ->name('usuarios.index');
-});
+// Rutas sin protección de autenticación (para desarrollo)
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+// Rutas de Intereses
+Route::get('/intereses/crear', [InteresController::class, 'create'])->name('intereses.create');
+Route::post('/intereses', [InteresController::class, 'store'])->name('intereses.store');
+
+// Rutas de Personas
+Route::get('/personas/crear', [PersonaController::class, 'create'])->name('personas.create');
+Route::post('/personas', [PersonaController::class, 'store'])->name('personas.store');
+
+// Rutas de Usuarios
+Route::get('/usuarios', [UsuarioController::class, 'index'])->name('usuarios.index');

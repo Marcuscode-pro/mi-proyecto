@@ -1,10 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Models;
 
-use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Model;
 
-class UserController extends Controller
+class Interes extends Model
 {
-    //
+    protected $table = 'intereses'; // Opcional si tu tabla ya se llama 'intereses'
+    
+    protected $fillable = [
+        'nombre',
+        'descripcion',
+    ];
 }
