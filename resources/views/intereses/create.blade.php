@@ -13,8 +13,8 @@
     <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 md:p-8">
         
         {{-- Recuerda colocar tu ruta correcta en el action --}}
-        <form action="#" method="POST" class="space-y-5">
-            @csrf
+    <form action="{{ route('intereses.store') }}" method="POST" class="space-y-5">
+                @csrf
             
             {{-- Campo Nombre del Interés --}}
             <div>

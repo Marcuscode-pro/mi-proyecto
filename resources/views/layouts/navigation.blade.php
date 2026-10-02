@@ -6,7 +6,7 @@
 
         <div class="flex items-center space-x-4">
             <span class="text-sm text-gray-600">
-                {{ Auth::user()->name }}
+                {{ Auth::user()?->name ?? 'Invitado' }}
             </span>
 
             <form method="POST" action="{{ route('logout') }}">

@@ -19,7 +19,7 @@
             </h1>
             
             <h2 class="text-gray-500 font-semibold mb-6 text-[15px] leading-tight">
-                Regístrate para ver fotos y videos de tus amigos.
+                Regístrate para usar la aplicacion
             </h2>
 
             {{-- Asegúrate de que la ruta action="{{ route('register') }}" sea la correcta para tu sistema --}}

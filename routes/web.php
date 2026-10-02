@@ -6,12 +6,12 @@ use App\Http\Controllers\InteresController;
 use App\Http\Controllers\PersonaController;
 use App\Http\Controllers\UsuarioController;
 
-// Redireccionar la página de inicio al Dashboard
+// Redireccionar al Dashboard
 Route::get('/', function () {
     return redirect()->route('dashboard');
 });
 
-// Rutas sin protección de autenticación (para desarrollo)
+// Rutas sin bloqueo de seguridad general
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
 // Rutas de Intereses
@@ -23,9 +23,4 @@ Route::get('/personas/crear', [PersonaController::class, 'create'])->name('perso
 Route::post('/personas', [PersonaController::class, 'store'])->name('personas.store');
 
 // Rutas de Usuarios
-// Route::get('/usuarios', [UsuarioController::class, 'index'])->name('usuarios.index');
-// Rutas de Usuarios
-// Utilizamos resource para generar automáticamente todas las rutas del CRUD (index, create, store, etc.)
-Route::resource('usuarios', UsuarioController::class)->middleware('auth');
-
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware('auth');
+Route::resource('usuarios', UsuarioController::class);
