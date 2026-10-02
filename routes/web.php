@@ -23,4 +23,9 @@ Route::get('/personas/crear', [PersonaController::class, 'create'])->name('perso
 Route::post('/personas', [PersonaController::class, 'store'])->name('personas.store');
 
 // Rutas de Usuarios
-Route::get('/usuarios', [UsuarioController::class, 'index'])->name('usuarios.index');
+// Route::get('/usuarios', [UsuarioController::class, 'index'])->name('usuarios.index');
+// Rutas de Usuarios
+// Utilizamos resource para generar automáticamente todas las rutas del CRUD (index, create, store, etc.)
+Route::resource('usuarios', UsuarioController::class)->middleware('auth');
+
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware('auth');

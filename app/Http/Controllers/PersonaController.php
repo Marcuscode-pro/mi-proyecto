@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Persona;
+use App\Models\Interes; // 1. Agregamos la importación del modelo
 use Illuminate\Http\Request;
 
 class PersonaController extends Controller
@@ -21,7 +22,8 @@ class PersonaController extends Controller
     public function create()
     {
         $intereses = Interes::all();
-        return view ('personas.create', compact('interses'));
+        // 2. Corregimos el error tipográfico: 'interses' -> 'intereses'
+        return view('personas.create', compact('intereses'));
     }
 
     /**
@@ -34,11 +36,16 @@ class PersonaController extends Controller
             'email' => 'required|email|unique:personas',
             'intereses' => 'array',
         ]);
-        $persona = Persona::create($request ->only('nombre', 'email'));
-        if  ($request ->has('intereses')) {
-            $persona ->intereses() ->attach($request ->intereses);
+
+        $persona = Persona::create($request->only('nombre', 'email'));
+
+        if ($request->has('intereses')) {
+            $persona->intereses()->attach($request->intereses);
         }
-        return redirect ()->route('persona.create')
+
+        // 3. Cambiamos 'persona.create' a 'personas.create' (plural) 
+        // ya que los controladores de recursos en Laravel usan plural por defecto.
+        return redirect()->route('personas.create')
             ->with('success', 'Persona creada exitosamente');
     }
 
